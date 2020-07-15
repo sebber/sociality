@@ -14,7 +14,9 @@ defmodule Sociality.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Sociality.PubSub},
       # Start the Endpoint (http/https)
-      SocialityWeb.Endpoint
+      SocialityWeb.Endpoint,
+      # Start presence
+      SocialityWeb.Presence
       # Start a worker by calling: Sociality.Worker.start_link(arg)
       # {Sociality.Worker, arg}
     ]
