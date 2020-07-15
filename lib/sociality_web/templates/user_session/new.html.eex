@@ -1,0 +1,39 @@
+<%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user], fn f -> %>
+  <%= if @error_message do %>
+    <div class="alert alert-danger">
+      <p><%= @error_message %></p>
+    </div>
+  <% end %>
+
+<div class="my-16 flex flex-row justify-center align-center">
+    <div class="bg-white w-128 shadow rounded-md">
+      <div class="px-8 py-2 bg-teal-500">
+        <h1 class="text-lg">Sign in plz</h1>
+      </div>
+
+      <div class="px-8 py-2 flex flex-col justify-between">
+        <%= label f, :email, class: "py-1" %>
+        <%= email_input f, :email, required: true, class: "p-1 border border-teal-500 rounded text-sm text-teal-800" %>
+      </div>
+
+      <div class="px-8 py-2 flex flex-col justify-between">
+        <%= label f, :password, class: "py-1" %>
+        <%= password_input f, :password, required: true, class: "p-1 border border-teal-500 rounded text-sm text-teal-800" %>
+      </div>
+
+      <div class="px-8 py-2 flex flex-col justify-between">
+        <%= label f, :remember_me, "Keep me logged in for 60 days" %>
+        <%= checkbox f, :remember_me %>
+      </div>
+
+      <div class="w-full mt-4 py-3 px-4 bg-gray-200 flex flex-row justify-end">
+        <%= submit "Log in", class: "bg-teal-500 px-2 py-1 rounded text-teal-100 text-sm" %>
+      </div>
+    <div>
+  </div>
+<% end %>
+
+<p>
+  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
+  <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
+</p>

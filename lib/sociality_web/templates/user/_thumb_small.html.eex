@@ -1,0 +1,5 @@
+<div class="bg-gray-600 w-8 h-8 rounded-full overflow-hidden">
+    <%= if @user.avatar do %>
+    <img src="<%= Avatar.url({@user.avatar, @user}, :thumb) %>" />
+    <% end %>
+</div>

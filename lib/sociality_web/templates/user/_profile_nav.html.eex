@@ -1,0 +1,13 @@
+<div class="bg-white w-full border-b border-gray-300 h-12 mb-8 flex flex-row">
+<%= for {url, text} <- user_routes(@conn, @user) do %>
+    <%= if @current_path == url do %>
+    <a href="<%= url %>" class="flex flex-col justify-center px-2 mx-2 border-b-2 border-indigo-400">
+        <span><%= text %></span>
+    </a>
+    <% else %>
+    <a href="<%= url %>" class="flex flex-col justify-center px-2 mx-2">
+        <span><%= text %></span>
+    </a>
+    <% end %>
+<% end %>
+</div>

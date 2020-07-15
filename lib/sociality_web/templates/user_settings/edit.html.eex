@@ -1,0 +1,95 @@
+<%= SocialityWeb.UserView.render("_profile_nav.html", conn: @conn, user: @current_user, current_path: Routes.user_settings_path(@conn, :edit)) %>
+
+<div class="bg-white border border-gray-300 my-8 rounded-md">
+  <h3 class="bg-gray-200 text-sm py-1 px-4">Upload avatar</h3>
+
+  <%= form_for @avatar_changeset, Routes.user_settings_path(@conn, :update_avatar), [multipart: true], fn f -> %>
+    <%= if @avatar_changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <div class="px-2">
+        <div class="py-4">
+            <%= file_input f, :photo, class: "form-control" %>
+        </div>
+
+        <div class="flex flex-row justify-end border-t border-gray-300 py-2">
+            <%= submit "Save", class: "px-4 py-1 bg-indigo-800 rounded-full text-xs text-gray-400 border border-indigo-400 hover:bg-indigo-700 hover:text-gray-200" %>
+        </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="bg-white border border-gray-300 my-8 rounded-md">
+  <h3 class="bg-gray-200 text-sm py-1 px-4">Change name</h3>
+
+  <%= form_for @name_changeset, Routes.user_settings_path(@conn, :update_name), fn f -> %>
+    <%= if @name_changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <%= label f, :name %>
+    <%= text_input f, :name, required: true %>
+    <%= error_tag f, :name %>
+
+    <div>
+      <%= submit "Change name" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="bg-white border border-gray-300 my-8 rounded-md">
+  <h3 class="bg-gray-200 text-sm py-1 px-4">Change e-mail</h3>
+
+  <%= form_for @email_changeset, Routes.user_settings_path(@conn, :update_email), fn f -> %>
+    <%= if @email_changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <%= label f, :email %>
+    <%= email_input f, :email, required: true %>
+    <%= error_tag f, :email %>
+
+    <%= label f, :current_password, for: "current_password_for_email" %>
+    <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email" %>
+    <%= error_tag f, :current_password %>
+
+    <div>
+      <%= submit "Change e-mail" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="bg-white border border-gray-300 my-8 rounded-md">
+  <h3 class="bg-gray-200 text-sm py-1 px-4">Change password</h3>
+
+  <%= form_for @password_changeset, Routes.user_settings_path(@conn, :update_password), fn f -> %>
+    <%= if @password_changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <%= label f, :password, "New password" %>
+    <%= password_input f, :password, required: true %>
+    <%= error_tag f, :password %>
+
+    <%= label f, :password_confirmation, "Confirm new password" %>
+    <%= password_input f, :password_confirmation, required: true %>
+    <%= error_tag f, :password_confirmation %>
+
+    <%= label f, :current_password, for: "current_password_for_password" %>
+    <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password" %>
+    <%= error_tag f, :current_password %>
+
+    <div>
+      <%= submit "Change password" %>
+    </div>
+  <% end %>
+</div>
