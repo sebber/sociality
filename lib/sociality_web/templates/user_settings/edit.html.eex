@@ -10,14 +10,15 @@
       </div>
     <% end %>
 
-    <div class="px-2">
-        <div class="py-4">
+    <div class="px-6">
+        <div class="py-4 flex flex-col">
             <%= file_input f, :photo, class: "form-control" %>
         </div>
+    </div>
 
-        <div class="flex flex-row justify-end border-t border-gray-300 py-2">
-            <%= submit "Save", class: "px-4 py-1 bg-indigo-800 rounded-full text-xs text-gray-400 border border-indigo-400 hover:bg-indigo-700 hover:text-gray-200" %>
-        </div>
+    <div class="flex flex-row justify-end border-t border-gray-300 mx-4 py-2">
+        <%= submit "Upload new avatar",
+              class: "px-4 py-1 bg-indigo-800 rounded-full text-xs text-gray-400 border border-indigo-400 hover:bg-indigo-700 hover:text-gray-200" %>
     </div>
   <% end %>
 </div>
@@ -32,12 +33,20 @@
       </div>
     <% end %>
 
-    <%= label f, :name %>
-    <%= text_input f, :name, required: true %>
-    <%= error_tag f, :name %>
+    <div class="px-6">
+      <div class="py-4 flex flex-col">
+        <%= label f, :name,
+              class: "text-sm font-bold" %>
+        <%= text_input f, :name,
+              required: true,
+              class: "px-2 py-1 border border-gray-200" %>
+        <%= error_tag f, :name %>
+      </div>
+    </div>
 
-    <div>
-      <%= submit "Change name" %>
+    <div class="flex flex-row justify-end border-t border-gray-300 mx-4 py-2">
+      <%= submit "Change name",
+            class: "px-4 py-1 bg-indigo-800 rounded-full text-xs text-gray-400 border border-indigo-400 hover:bg-indigo-700 hover:text-gray-200" %>
     </div>
   <% end %>
 </div>
@@ -52,16 +61,32 @@
       </div>
     <% end %>
 
-    <%= label f, :email %>
-    <%= email_input f, :email, required: true %>
-    <%= error_tag f, :email %>
+    <div class="px-6">
+      <div class="py-4 flex flex-col">
+        <%= label f, :email,
+              class: "text-sm font-bold" %>
+        <%= email_input f, :email,
+              required: true,
+              class: "px-2 py-1 border border-gray-200" %>
+        <%= error_tag f, :email %>
+      </div>
 
-    <%= label f, :current_password, for: "current_password_for_email" %>
-    <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email" %>
-    <%= error_tag f, :current_password %>
+      <div class="py-4 flex flex-col">
+        <%= label f, :current_password,
+              for: "current_password_for_email",
+              class: "text-sm font-bold" %>
+        <%= password_input f, :current_password,
+              required: true,
+              name: "current_password",
+              id: "current_password_for_email",
+              class: "px-2 py-1 border border-gray-200" %>
+        <%= error_tag f, :current_password %>
+      </div>
+    </div>
 
-    <div>
-      <%= submit "Change e-mail" %>
+    <div class="flex flex-row justify-end border-t border-gray-300 mx-4 py-2">
+      <%= submit "Change e-mail",
+            class: "px-4 py-1 bg-indigo-800 rounded-full text-xs text-gray-400 border border-indigo-400 hover:bg-indigo-700 hover:text-gray-200" %>
     </div>
   <% end %>
 </div>
@@ -76,20 +101,40 @@
       </div>
     <% end %>
 
-    <%= label f, :password, "New password" %>
-    <%= password_input f, :password, required: true %>
-    <%= error_tag f, :password %>
+    <div class="px-6">
+      <div class="py-4 flex flex-col">
+        <%= label f, :password, "New password",
+              class: "text-sm font-bold" %>
+        <%= password_input f, :password,
+              required: true,
+              class: "px-2 py-1 border border-gray-200" %>
+        <%= error_tag f, :password %>
+      </div>
 
-    <%= label f, :password_confirmation, "Confirm new password" %>
-    <%= password_input f, :password_confirmation, required: true %>
-    <%= error_tag f, :password_confirmation %>
+      <div class="py-4 flex flex-col">
+        <%= label f, :password_confirmation, "Confirm new password",
+              class: "text-sm font-bold" %>
+        <%= password_input f, :password_confirmation,
+              required: true,
+              class: "px-2 py-1 border border-gray-200" %>
+        <%= error_tag f, :password_confirmation %>
+      </div>
 
-    <%= label f, :current_password, for: "current_password_for_password" %>
-    <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password" %>
-    <%= error_tag f, :current_password %>
+      <div class="py-4 flex flex-col">
+        <%= label f, :current_password, for: "current_password_for_password",
+              class: "text-sm font-bold" %>
+        <%= password_input f, :current_password,
+              required: true,
+              name: "current_password",
+              id: "current_password_for_password",
+              class: "px-2 py-1 border border-gray-200" %>
+        <%= error_tag f, :current_password %>
+      </div>
+    </div>
 
-    <div>
-      <%= submit "Change password" %>
+    <div class="flex flex-row justify-end border-t border-gray-300 mx-4 py-2">
+      <%= submit "Change password",
+            class: "px-4 py-1 bg-indigo-800 rounded-full text-xs text-gray-400 border border-indigo-400 hover:bg-indigo-700 hover:text-gray-200" %>
     </div>
   <% end %>
 </div>
