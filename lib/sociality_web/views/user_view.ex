@@ -13,7 +13,7 @@ defmodule SocialityWeb.UserView do
     Phoenix.Controller.current_path(conn)
   end
 
-  def current_path(%Phoenix.LiveView.Socket{} = socket) do
+  def current_path(%Phoenix.LiveView.Socket{} = _socket) do
     ""
   end
 end
