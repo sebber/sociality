@@ -1,13 +1,7 @@
 defmodule SocialityWeb.Users.ProfileLive do
   use SocialityWeb, :live_view
   alias Sociality.Posts
-  alias Sociality.Posts.Post
-  alias Sociality.Comments
-  alias Sociality.Comments.Comment
   alias Sociality.Accounts
-
-  alias Sociality.Avatar
-  import SocialityWeb.Helpers
 
   def mount(%{"id" => id}, session, socket) do
     socket =
@@ -38,14 +32,6 @@ defmodule SocialityWeb.Users.ProfileLive do
     """
   end
 
-  defp user_name(user) do
-    if user.name do
-      user.name
-    else
-      user.email
-    end
-  end
-
   def handle_params(%{"id" => id}, _uri, socket) do
     {:noreply, assign_profile(socket, id)}
   end
@@ -61,7 +47,11 @@ defmodule SocialityWeb.Users.ProfileLive do
 
   defp assign_profile(socket, user_id) do
     user = Accounts.get_user!(user_id)
-    posts = Posts.list_posts(%{author: true, comments: %{author: true}}, %{author: user.id})
+
+    posts =
+      Posts.list_posts(%{author: true, reactions: true, comments: %{author: true}}, %{
+        author: user.id
+      })
 
     assign(socket,
       profile_user: user,

@@ -92,6 +92,7 @@ defmodule SocialityWeb do
       import SocialityWeb.ErrorHelpers
       import SocialityWeb.Gettext
       alias SocialityWeb.Router.Helpers, as: Routes
+      alias SocialityWeb.Components
       import SocialityWeb.Helpers
 
       alias Sociality.Avatar

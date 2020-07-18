@@ -49,7 +49,7 @@ defmodule SocialityWeb.Users.PostsLive do
 
   defp fetch(assigns, user) do
     posts =
-      Posts.list_posts(%{author: true, comments: %{author: true}}, %{
+      Posts.list_posts(%{author: true, reactions: true, comments: %{author: true}}, %{
         author: user.username
       })
 
