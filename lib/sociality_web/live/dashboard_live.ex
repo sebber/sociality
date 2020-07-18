@@ -6,12 +6,7 @@ defmodule SocialityWeb.DashboardLive do
     socket = assign_defaults(socket, session)
     if connected?(socket), do: Sociality.Posts.subscribe()
 
-    socket =
-      assign(socket,
-        posts: Posts.list_posts(%{author: true, reactions: true, comments: %{author: true}})
-      )
-
-    {:ok, socket}
+    {:ok, fetch(socket)}
   end
 
   def render(assigns) do
@@ -24,8 +19,12 @@ defmodule SocialityWeb.DashboardLive do
   end
 
   def handle_info({Posts, [:posts | _], _post}, socket) do
-    posts = Posts.list_posts(%{author: true, reactions: true, comments: %{author: true}})
-    socket = assign(socket, posts: posts)
-    {:noreply, socket}
+    {:noreply, fetch(socket)}
+  end
+
+  def fetch(socket) do
+    assign(socket,
+      posts: Posts.list_posts(%{author: true, reactions: true, comments: %{author: true}})
+    )
   end
 end
