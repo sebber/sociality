@@ -61,7 +61,11 @@ defmodule SocialityWeb.Users.ProfileLive do
 
   defp assign_profile(socket, user_id) do
     user = Accounts.get_user!(user_id)
-    posts = Posts.list_posts(%{author: true, comments: %{author: true}}, %{author: user.id})
+
+    posts =
+      Posts.list_posts(%{author: true, reactions: true, comments: %{author: true}}, %{
+        author: user.id
+      })
 
     assign(socket,
       profile_user: user,

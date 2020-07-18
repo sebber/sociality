@@ -6,7 +6,7 @@ defmodule Sociality.Posts do
   import Ecto.Query, warn: false
   alias Sociality.Repo
 
-  alias Sociality.Posts.{Post, PostComment}
+  alias Sociality.Posts.{Post, PostComment, Reaction}
   alias Sociality.Accounts.User
   alias Sociality.Comments.Comment
 
@@ -35,6 +35,7 @@ defmodule Sociality.Posts do
     base_query()
     |> maybe_preload_author(params[:author])
     |> maybe_preload_comments(params[:comments])
+    |> maybe_preload_reactions(params[:reactions])
     |> maybe_filter_by_author(filters[:author])
     |> paginate(params[:page], params[:page_size])
     |> sort(params[:sort])
@@ -70,6 +71,12 @@ defmodule Sociality.Posts do
       preload: [author: author],
       order_by: [asc: comment.inserted_at]
     )
+  end
+
+  defp maybe_preload_reactions(query, nil), do: query
+
+  defp maybe_preload_reactions(query, _) do
+    from(posts in query, preload: :reactions)
   end
 
   defp maybe_filter_by_author(query, nil), do: query
@@ -206,6 +213,34 @@ defmodule Sociality.Posts do
 
       notify_subscribers({:ok, Repo.preload(post, :comments)}, :post_commented_on)
     end)
+  end
+
+  @doc """
+  Likes a post
+  """
+  def like_post(%User{} = user, %Post{} = post) do
+    %Reaction{}
+    |> Reaction.changeset(%{user_id: user.id, post_id: post.id})
+    |> Repo.insert()
+
+    notify_subscribers({:ok, Repo.preload(post, :reactions)}, :post_liked)
+  end
+
+  @doc """
+  Likes a post
+  """
+  def unlike_post(%User{} = user, %Post{} = post) do
+    query = from(r in Reaction, where: r.user_id == ^user.id and r.post_id == ^post.id)
+
+    case Repo.one(query) do
+      nil ->
+        {:ok, :none_found_so_done}
+
+      reaction ->
+        Repo.delete(reaction)
+
+        notify_subscribers({:ok, Repo.preload(post, :reactions)}, :post_unliked)
+    end
   end
 
   @pubsub Sociality.PubSub

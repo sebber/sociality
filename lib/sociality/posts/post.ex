@@ -11,6 +11,8 @@ defmodule Sociality.Posts.Post do
       on_replace: :mark_as_invalid,
       on_delete: :delete_all
 
+    has_many :reactions, Sociality.Posts.Reaction
+
     timestamps()
   end
 
