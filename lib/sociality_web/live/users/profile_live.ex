@@ -1,13 +1,7 @@
 defmodule SocialityWeb.Users.ProfileLive do
   use SocialityWeb, :live_view
   alias Sociality.Posts
-  alias Sociality.Posts.Post
-  alias Sociality.Comments
-  alias Sociality.Comments.Comment
   alias Sociality.Accounts
-
-  alias Sociality.Avatar
-  import SocialityWeb.Helpers
 
   def mount(%{"id" => id}, session, socket) do
     socket =
@@ -36,14 +30,6 @@ defmodule SocialityWeb.Users.ProfileLive do
 
     <%= live_component @socket, SocialityWeb.Post.ListComponent, id: :profile_posts, current_user: @current_user, posts: @posts %>
     """
-  end
-
-  defp user_name(user) do
-    if user.name do
-      user.name
-    else
-      user.email
-    end
   end
 
   def handle_params(%{"id" => id}, _uri, socket) do
