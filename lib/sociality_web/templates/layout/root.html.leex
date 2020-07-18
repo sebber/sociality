@@ -17,6 +17,10 @@
               <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
                 <%= link("LiveDashboard", to: Routes.live_dashboard_path(@conn, :home), class: "px-4 py-2 text-sm text-gray-400 hover:text-gray-100") %>
               <% end %>
+
+              <div class="h-full w-full flex flex-row px-4 justify-center align-center content-center">
+                <%= live_render @conn, SocialityWeb.SearchLive, id: :search %>
+              </div>
             </div>
 
             <div class="flex flex-row">
