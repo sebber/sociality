@@ -15,7 +15,7 @@ defmodule SocialityWeb.UserSettingsController do
     user = conn.assigns.current_user
 
     with {:ok, filename} <- Avatar.store({photo, user}),
-         {:ok, user} <- Accounts.apply_avatar(user, filename) do
+         {:ok, _user} <- Accounts.apply_avatar(user, filename) do
       conn
       |> put_flash(:info, "uploaded!!")
       |> redirect(to: Routes.user_settings_path(conn, :edit))
